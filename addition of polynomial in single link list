@@ -1,0 +1,146 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+    int Coef;
+    int Pow;
+    Node *Next;
+};
+
+void AddEnd(Node **pt, int co, int pow)
+{
+    Node *temp, *Q = *pt;
+    if (*pt == NULL)
+    {
+       ( *pt) = (Node*) malloc(sizeof(Node));
+        (*pt)->Coef = co;
+        (*pt)->Pow = pow;
+        (*pt)->Next = NULL;
+    }
+    else
+    {
+        while(Q->Next != NULL)
+        Q = Q->Next;
+        temp = (Node*) malloc(sizeof(Node));
+        temp->Coef = co;
+        temp->Pow = pow;
+        temp->Next = NULL;
+        Q->Next = temp;
+    }
+}
+
+void AddEnd1(Node **pt, int co, int pow)
+{
+    Node *temp, *Q = *pt;
+    if (*pt == NULL)
+    {
+       ( *pt) = (Node*) malloc(sizeof(Node));
+        (*pt)->Coef = co;
+        (*pt)->Pow = pow;
+        (*pt)->Next = NULL;
+    }
+    else
+    {
+        while(Q->Next != NULL)
+        Q = Q->Next;
+        temp = (Node*) malloc(sizeof(Node));
+        temp->Coef = co;
+        temp->Pow = pow;
+        temp->Next = NULL;
+        Q->Next = temp;
+    }
+}
+
+void displayPolynomial(Node *pt)
+{
+    while(pt != NULL)
+    {
+        if (pt->Pow == 1)
+            printf(" %dX +", pt->Coef);
+        else if (pt->Pow == 0)
+            printf(" %d ", pt->Coef);
+        else
+            printf(" %dX^%d +", pt->Coef, pt->Pow);
+        pt = pt->Next;
+    }
+}
+
+void addPolynomials( Node** result,  Node* first,  Node* second)
+{
+ 	 Node* temp = ( Node*)malloc(sizeof(Node));
+ 	temp->Next = NULL;
+ 	*result = temp;
+ 	while(first!=NULL && second!=NULL)
+ 	{
+ 		if(first->Pow > second->Pow)
+ 		{
+ 			temp->Coef = first->Coef;
+ 			temp->Pow = first->Pow;
+ 			first = first->Next;
+ 		}
+ 		else if(first->Pow < second->Pow)
+ 		{
+ 			temp->Coef = second->Coef;
+ 			temp->Pow = second->Pow;
+ 			second = second->Next;
+ 		}
+ 		else
+ 		{
+ 			temp->Coef = first->Coef + second->Coef;
+ 			temp->Pow = first->Pow;
+ 			first = first->Next;
+ 			second = second->Next;
+ 		}
+
+ 		if(first !=NULL&& second!=NULL)
+ 		{
+ 			temp->Next = ( Node*)malloc(sizeof( Node));
+ 			temp = temp->Next;
+ 			temp->Next = NULL;
+ 		}
+ 	}
+ 	while(first!=NULL || second!=NULL)
+ 	{
+ 		temp->Next = ( Node*)malloc(sizeof( Node));
+ 		temp = temp->Next;
+ 		temp->Next = NULL;
+
+ 		if(first!=NULL)
+ 		{
+ 			temp->Coef = first->Coef;
+ 			temp->Pow = first->Pow;
+ 			first = first->Next;
+ 		}
+
+ 		else if(second!=NULL)
+ 		{
+ 			temp->Coef = second->Coef;
+ 			temp->Pow = second->Pow;
+ 			second = second->Next;
+ 		}
+ 	}
+}
+
+
+int main()
+{
+    Node* first = NULL;
+    Node* second = NULL;
+    Node* result = NULL;
+    AddEnd(&first,9,4);
+    AddEnd(&first,8,6);
+    AddEnd(&first,10,5);
+    AddEnd(&first,5,0);
+    AddEnd1(&second,9,4);
+    AddEnd1(&second,8,6);
+    AddEnd1(&second,10,5);
+    AddEnd1(&second,5,0);
+    addPolynomials(&result, first, second);
+	displayPolynomial(result);
+
+
+
+
+}
+
