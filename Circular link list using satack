@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int item;
+	node* next;
+};
+
+void addnode_beg(node** head,int val)
+{
+	node* Q= *head,*temp;
+	temp=(node*)malloc(sizeof(node));
+	temp->item=val;
+	if(*head==NULL)
+	{
+		*head=temp;
+		 temp->next=*head;
+	}
+	else
+	  {
+	  	while(Q->next!=*head)
+        Q=Q->next;
+        temp->next=*head;
+        Q->next=temp;
+        *head=temp;
+    }
+}
+
+void addnode_end(node** head,int val)
+{
+	node* Q= *head,*temp;
+	temp=(node*)malloc(sizeof(node));
+	temp->item=val;
+	if(*head==NULL)
+	{
+		*head=temp;
+		 temp->next=*head;
+	}
+	else
+	  {
+	  	while(Q->next!=*head)
+        Q=Q->next;
+        Q->next=temp;
+        temp->next=*head;
+    }
+}
+
+void delete_beg(node** head)
+{
+	node* Q= *head;
+	if(*head==NULL)
+		printf("list is empty");
+
+		else if((*head)->next==*head)
+	{
+		  *head=NULL;
+		  free(*head);
+		}
+
+	else
+	{
+	  	while(Q->next!=*head)
+        Q=Q->next;
+        Q->next=(*head)->next;
+        free(*head);
+        *head=Q->next;
+		}
+}
+
+void delete_end(node** head)
+{
+	node* Q= *head;
+	if(*head==NULL)
+		printf("list is empty");
+
+	else if((*head)->next==*head)
+	{
+		  *head=NULL;
+		  free(*head);
+		}
+
+	else
+	{
+	  	while(Q->next->next!=*head)
+        Q=Q->next;
+        Q->next=(*head);
+    }
+}
+
+void display(node* head)
+ {
+ 	 node*Q = head;
+ 	 while(Q->next!=head)
+ 	 {
+ 	  printf("%d ",Q->item);
+ 	  Q=Q->next;
+ 	 }
+ 	 printf("%d ",Q->item);
+	}
+
+int main()
+{
+	node* Clist=NULL;
+	addnode_beg(&Clist,12);
+	addnode_beg(&Clist,13);
+	addnode_beg(&Clist,15);
+	addnode_beg(&Clist,19);
+	display(Clist);
+	printf("\n");
+	addnode_end(&Clist,89);
+	display(Clist);
+	printf("\n");
+	delete_beg(&Clist);
+	delete_beg(&Clist);
+	display(Clist);
+	printf("\n");
+	delete_end(&Clist);
+	display(Clist);
+}
