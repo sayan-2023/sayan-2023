@@ -1,0 +1,11 @@
+def kthLargestFactor(N,K):
+         for i in range(N,0,-1):
+                  if N%i==0:
+                           K-=1
+                  if K==0:
+                           return i
+         return 1
+N=12
+K=1
+m=kthLargestFactor(N,K)
+print("KTH LARGEST FACTOR : ",m)
