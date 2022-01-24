@@ -1,0 +1,12 @@
+def main():
+         arr=[1,2,2,4,6,7,9,11,11]
+         numberMap ={}
+         for i in arr:
+                  if not i in numberMap:
+                           numberMap[i]=True
+                  else:
+                           print("Reapeataing =",i)
+         for i in range (1,len(arr)):
+                  if not i in numberMap:
+                           print("Missing =",i)
+main()                           
