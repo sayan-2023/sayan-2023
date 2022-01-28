@@ -1,0 +1,18 @@
+def rotate(arr,n,k):
+         x=arr[n-1]
+
+         for i in range (n-1,0,-1):
+                  arr[i]=arr[i-k]
+         arr[k-1]=x
+
+arr=[10,20,30,40]
+n=len(arr)
+k=1
+print("Given array is")
+for i in range (0,n):
+         print(arr[i],end="")
+rotate(arr,n,k)
+print("\nRotate array is")
+for i in range (0,n):
+         print(arr[i],end="")
+                                                             
