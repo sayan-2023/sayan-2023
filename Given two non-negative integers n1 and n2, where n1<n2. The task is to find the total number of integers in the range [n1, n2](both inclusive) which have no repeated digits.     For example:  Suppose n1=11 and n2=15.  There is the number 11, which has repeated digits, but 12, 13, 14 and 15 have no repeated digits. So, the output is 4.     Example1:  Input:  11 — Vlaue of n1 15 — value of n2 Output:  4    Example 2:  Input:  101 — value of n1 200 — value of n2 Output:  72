@@ -1,0 +1,21 @@
+def repeated_digit(n):
+         a=[]
+
+         while n!=0:
+                  d=n%10
+                  if d in a:
+                           return 0
+                  a.append(d)
+                  n=n//10
+         return 1
+
+def calculated(L,R):
+         ans=0
+
+         for i in range (L,R+1):
+                  ans=ans+repeated_digit(i)
+         return ans         
+L=1
+R=100
+print(f"no.s are {calculated(L,R)}")                                             
+                  
