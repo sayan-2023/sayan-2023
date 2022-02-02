@@ -1,0 +1,133 @@
+
+
+//C++
+
+# include<bits/stdc++.h>
+# include<iostream>
+using namespace std;
+
+struct LLNode{
+int data;
+LLNode*next;
+
+};
+int search(LLNode*head,int data)
+{
+
+
+    LLNode*temp = head;
+    while(temp!=NULL)
+    {
+        if(temp->data == data)
+        {       return 1;
+                }
+
+    temp=temp->next;
+    }
+    return 0;
+}
+void insertAtBegaining(LLNode**head,int dataToBeInserted)
+{
+    LLNode*new_node=new LLNode();
+    new_node->data=dataToBeInserted;
+    new_node->next=*head;
+    *head=new_node;
+}
+LLNode*findUnion(LLNode*llist1,LLNode*llist2)
+{
+    LLNode*UnionLL=NULL;
+    LLNode*temp1=llist1;
+    LLNode*temp2=llist2;
+
+    while (temp1!=NULL)
+    {
+        insertAtBegaining(&UnionLL,temp1->data);
+        temp1=temp1->next;
+    }
+    while (temp2!=NULL)
+    {
+        if(!search(llist1,temp2->data))
+        {
+            insertAtBegaining(&UnionLL,temp2->data);
+        }
+        temp2 = temp2->next;
+    }
+    return UnionLL;
+
+}
+
+
+
+LLNode *findIntersection(LLNode* llist1,LLNode*llist2)
+{
+    LLNode*insectionLL=NULL;
+    LLNode*temp1=llist1;
+    while (temp1!=NULL)
+    {
+        if(search(llist2,temp1->data))
+        {
+            insertAtBegaining(&insectionLL,temp1->data);
+        }
+        temp1=temp1->next;
+
+    }
+    return insectionLL;
+}
+void display(LLNode**head)
+{
+    LLNode*temp=*head;
+    while (temp!=NULL)
+    {
+        if(temp->next!=NULL)
+            cout<<temp->data<<"->";
+            else
+                cout<<temp->data;
+
+        temp=temp->next;
+
+    }
+    cout<<endl;
+
+}
+int main()
+{
+    LLNode*result=NULL;
+    LLNode*UnionLL=NULL;
+    LLNode*insectionLL=NULL;
+
+
+    LLNode*llist1=NULL;
+    insertAtBegaining(&llist1,5);
+    insertAtBegaining(&llist1,4);
+    insertAtBegaining(&llist1,6);
+    insertAtBegaining(&llist1,2);
+    insertAtBegaining(&llist1,8);
+    insertAtBegaining(&llist1,9);
+
+
+     LLNode*llist2=NULL;
+    insertAtBegaining(&llist2,20);
+    insertAtBegaining(&llist2,18);
+    insertAtBegaining(&llist2,11);
+    insertAtBegaining(&llist2,12);
+    insertAtBegaining(&llist2,8);
+    insertAtBegaining(&llist2,9);
+
+    cout<<"\nTwo LList are :-\n";
+    display(&llist1);
+    display(&llist2);
+    UnionLL=findUnion(llist1,llist2);
+    cout<<"Union of two lists :-"<<endl;
+    display(&UnionLL);
+
+
+    insectionLL=findIntersection(llist1,llist2);
+    cout<<"Intersection Two LList are :-"<<endl;
+    display(&insectionLL);
+
+
+
+
+
+
+}
