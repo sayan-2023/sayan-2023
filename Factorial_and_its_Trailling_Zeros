@@ -1,0 +1,37 @@
+
+
+// Python
+def factorial(n):
+         if n ==0 or n ==1:
+                  return 1
+         else:
+                  return n*factorial(n-1)
+
+def tralling_zeros(n):
+         s=0
+         i=5
+         while(n//i!=0 and n//i>=1):
+                  s=s+(n//i)
+                  i=i*5
+         return s
+
+
+
+
+         # fac=factorial(n)
+         # c=0
+         # while (fac%10==0):
+                  # c=c+1
+                  # fac=fac//10
+         # return c         
+         
+
+
+
+if __name__=='__main__':
+         number=int(input("Enter the number :- "))
+         fac=factorial(number)
+         # print(f"The factorial is {fac}")
+         print(tralling_zeros(number))
+
+
