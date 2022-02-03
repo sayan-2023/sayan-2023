@@ -1,0 +1,85 @@
+
+//C++
+
+#include <bits/stdc++.h>
+using namespace std;
+struct ListNode{
+char data;
+ListNode*next;
+
+};
+
+void insertAtBeginning(ListNode **head, char data)
+{
+    ListNode *newNode = new ListNode();
+    newNode->data=data;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+void printList(ListNode *head)
+{
+    while (head != NULL)
+    {
+        cout << " " << head->data;
+        head = head->next;
+    }
+    cout << endl;
+}
+
+
+pair<ListNode*,ListNode*> reverse(ListNode* head, int count)
+{
+    ListNode *prev = NULL;
+    ListNode *curr = head;
+    ListNode*temp=NULL;
+    while (count > 0)
+    {
+        --count;
+        (temp) = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = temp;
+    }
+    return {prev, temp};
+}
+
+ListNode* reverseBetween(ListNode* head, int left, int right)
+{
+
+    ListNode *leftNode = head;
+    ListNode *beforeLeftNode = NULL;
+    for (int i=1; i < left; ++i)
+    {
+        beforeLeftNode = leftNode;
+        leftNode = leftNode->next;
+    }
+   auto [rightNode, afterRightNode] = reverse(leftNode, right-left+1);
+    if (beforeLeftNode != NULL)
+        beforeLeftNode->next = rightNode;
+    else
+        head = rightNode;
+    leftNode->next = afterRightNode;
+    return head;
+}
+
+int main()
+{
+    ListNode *head = NULL;
+    insertAtBeginning(&head, 'H');
+    insertAtBeginning(&head, 'G');
+    insertAtBeginning(&head, 'F');
+    insertAtBeginning(&head, 'E');
+    insertAtBeginning(&head, 'D');
+    insertAtBeginning(&head, 'C');
+    insertAtBeginning(&head, 'B');
+    insertAtBeginning(&head, 'A');
+
+    cout << "List :";
+    printList(head);
+    cout << "Reverse List between position 4 and 7:";
+    head = reverseBetween(head, 4, 7);
+    printList(head);
+
+    return 0;
+}
