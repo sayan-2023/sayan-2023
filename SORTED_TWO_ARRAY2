@@ -1,0 +1,54 @@
+
+Given two sorted arrays X[] and Y[] of size m and n each 
+where m >= n and X[] has exactly n vacant cells, merge 
+elements of Y[] in their correct position in array X[], i.e., 
+merge (X, Y) by keeping the sorted order
+
+//PYTHON
+def moveToEnd(orA, size):
+
+    i = 0
+    j = size - 1
+    for i in range(size-1, -1, -1):
+        if (orA[i] != 0):
+
+            orA[j] = orA[i]
+            j -= 1
+
+
+
+def merge(orA, N, m, n):
+
+    i = n
+    j = 0
+    x= 0
+    while (x < (m+n)):
+
+        if ( (i < (m+n) and orA[i] <= N[j])):
+
+            orA[x] = orA[i]
+            x += 1
+            i += 1
+
+        else:
+
+            orA[x] = N[j]
+            x += 1
+            j += 1
+
+
+
+def printArray(arr, size):
+
+    for i in range(size):
+        print(arr[i],  end="  ")
+
+
+
+orA = [0,2,0,3,0,5,6,0,0]
+N = [1,8,9,10,15]
+n = len(N)
+m = len(orA) - n
+moveToEnd(orA, m+n)
+merge(orA, N, m, n)
+printArray(orA, m+n)
