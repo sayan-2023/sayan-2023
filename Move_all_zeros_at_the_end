@@ -1,0 +1,37 @@
+
+
+Given an integer array, move all zeros present in it to the 
+end. The solution should maintain the relative order of 
+items in the array and should not use constant space.
+
+
+//C++
+# include<iostream>
+using namespace std;
+void movesZerosToEnd(int arr[],int n)
+{
+    int x={0};
+    for(int i=0;i<n;i++)
+        if(arr[i]!=0)
+        arr[x++]=arr[i];
+    for(int i=x;i<n;i++)
+        arr[i]=0;
+
+
+
+}
+void printarray(int arr[],int n)
+
+{
+    for (int i=0;i<n;i++)
+        cout<<arr[i]<<" ";
+}
+
+int main(){
+
+int arr[]={6,0,8,2,3,0,4,0,1};
+int n=sizeof (arr)/sizeof(arr[0]);
+movesZerosToEnd(arr,n);
+cout<<"After shifting all the zeros at the end :-";
+printarray(arr,n);
+}
