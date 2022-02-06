@@ -1,0 +1,22 @@
+
+
+//PYTHON
+def count_zeros_and_ones (arr,n):
+         count=0
+         result=0
+         for i in range (n):
+                  if (arr[i]==0):
+                           count=0
+                  else:
+                           count+=1
+                           result=max(result,count)
+         return result
+
+
+
+arr=[1,1,0,0,1,0,1,0,1,1,1,1]
+n=len(arr)
+c=count_zeros_and_ones(arr,n)
+d=n-c
+print(d)
+print(c)                                    
