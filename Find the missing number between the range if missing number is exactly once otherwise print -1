@@ -1,0 +1,51 @@
+
+//C++
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool compare(const pair<int, int>&a, const pair<int, int>&b)
+{
+   return a.second<b.second;
+}
+  
+int missingNumber(vector<int>& arr) {
+        int n = arr.size();
+        map<int , int> mp;
+        for(int i = 0 ; i < n ; i++){
+            mp[arr[i]]++;
+        }
+        for(int i = 0 ; i < n + 1 ; i++){
+            mp[i]++;
+        }
+        int res=0;
+        for(auto i : mp){
+            if(i.second == 1 && i.first<(max_element(mp.begin(),mp.end(),compare)->second)){
+                res = i.first;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        
+        return res;
+        
+    }
+
+int main()
+{
+    vector<int> v1;
+    int n,item;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>item;
+        v1.push_back(item);
+    }
+    
+    
+     cout<<"Missing number is:"<< missingNumber(v1)<<endl;
+    
+    
+}
