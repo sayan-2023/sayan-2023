@@ -1,0 +1,74 @@
+//C++
+#include <bits/stdc++.h>
+using namespace std;
+ 
+
+int find_Msb_pos(int n)
+{
+  
+    int pos = 0;
+    while (n) {
+ 
+        n = n >> 1;
+ 
+       
+        pos++;
+    }
+ 
+    
+    return pos;
+}
+ 
+
+bool check_ith_bit(int n, int i)
+{
+  
+    return (n & (1 << (i - 1)))
+               ? true
+               : false;
+}
+ 
+
+int no_of_flips(int n)
+{
+    
+    int len = find_Msb_pos(n);
+ 
+    
+    int ans = 0;
+ 
+
+    int right = 1;
+ 
+   
+    int left = len;
+ 
+    while (right < left) {
+ 
+        
+        if (check_ith_bit(n, right)
+            != check_ith_bit(n, left))
+            ans++;
+ 
+        
+        left--;
+ 
+        
+        right++;
+    }
+ 
+    
+    return ans;
+}
+ 
+
+int main()
+{
+ 
+    int n;
+    cin>>n;
+ 
+    cout << "NO of Binary Swap requied to convert Given Binary Sequence to  the Palindrom Binary Sequence :"<<no_of_flips(n);
+ 
+   
+}
