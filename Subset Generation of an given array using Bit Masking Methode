@@ -1,0 +1,37 @@
+//C++
+#include <bits/stdc++.h>
+using namespace std;
+vector<vector<int>> subsets (vector<int> num){
+    int n=num.size();
+    int subset_cnt =(1<<n);
+       vector<vector<int>>subsets;
+    for(int mark=0;mark<subset_cnt ;mark++){
+            vector<int>subset;
+        for (int i=0;i<n;i++){
+            if((mark&(1<<i))!=0){
+                subset.push_back(num[i]);
+            }
+        }
+        subsets.push_back(subset);
+    }
+    return subsets;
+}
+
+
+int main(){
+    int n,x;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++){
+        // int x;
+        cin>>v[i];
+      
+    }
+   auto all_subsets =subsets(v);
+   for(auto subset : all_subsets){
+       for(int  ele:subset ){
+           cout << ele;
+       }
+       cout<<endl;
+   }
+}
