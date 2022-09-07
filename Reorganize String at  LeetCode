@@ -1,0 +1,55 @@
+/*Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
+
+Return any possible rearrangement of s or return "" if not possible.
+Example 1:
+
+Input: s = "aab"
+Output: "aba"
+Example 2:
+
+Input: s = "aaab"
+Output: ""
+ 
+
+Constraints:
+
+1 <= s.length <= 500
+s consists of lowercase English letters.*/
+//C++
+class Solution {
+public:
+    string reorganizeString(string s) {
+        unordered_map<char,int>mp;
+        for(char & ch:s){
+            mp[ch]++;
+        }
+        priority_queue<pair<int,char>>pq;
+        for(auto[a,b]:mp){
+            pq.push({b,a});
+        }
+        string res="";
+        while(pq.size()>1){
+            auto val1=pq.top();
+                pq.pop();
+            auto val2=pq.top();
+                pq.pop();
+            res+=val1.second;
+                val1.first--;
+            res+=val2.second;
+                val2.first--;
+            if(val1.first) 
+                pq.push(val1);
+            if(val2.first) 
+                pq.push(val2);
+        }
+        if(!pq.empty()){
+            if(pq.top().first>1) 
+                return "";
+            else{
+                res+=pq.top().second;
+            }
+        }
+        return res;
+    }
+    
+};
