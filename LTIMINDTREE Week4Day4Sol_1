@@ -1,0 +1,68 @@
+Q No: 1
+Consider the following pandas DataFrame called "sales":
+
+Dataset:
+
+  Product  Quantity  Price
+
+0   apple         2    5.0
+
+1  orange         3    4.5
+
+2   apple         5    5.5
+
+3  banana         2    6.5
+
+4   apple         4    4.5
+
+5   apple         3    5.0
+
+ 
+
+Write a program to create a function named "total_sales_by_product" that takes in a DataFrame and returns a new DataFrame containing the total sales for each unique product.
+
+Sample Input:
+
+import pandas as pd
+
+def total_sales_by_product(dataframe):
+
+    # Your code here
+
+    pass
+
+sales = pd.DataFrame({'Product': ['apple', 'orange', 'apple', 'banana', 'apple', 'apple'],
+
+                    'Quantity': [2, 3, 5, 2, 4, 3],
+
+                    'Price': [5.0, 4.5, 5.5, 6.5, 4.5, 5.0]})
+
+result = total_sales_by_product(sales)
+
+print(result)
+
+
+
+
+import pandas as pd
+
+def total_sales_by_product(dataframe):
+
+    total_sales = dataframe.groupby('Product').agg({'Quantity': 'sum', 'Price': 'sum', 'Product': 'count'})
+
+    total_sales = total_sales.rename(columns={'Quantity': 'Total Quantity', 'Price': 'Total Price', 'Product': 'Total Sales'})
+
+    return total_sales
+
+sales = pd.DataFrame({'Product': ['apple', 'orange', 'apple', 'banana', 'apple', 'apple'],
+                      'Quantity': [2, 3, 5, 2, 4, 3],
+                      'Price': [5.0, 4.5, 5.5, 6.5, 4.5, 5.0]})
+
+result = total_sales_by_product(sales)
+
+print(result)
+
+
+
+
+
