@@ -1,0 +1,62 @@
+Use Pandas to read a CSV file named "sales_data.csv" and perform the following operations:
+
+ 
+
+Take a look at the first 5 rows of the dataframe and print them.
+For each region, calculate the sales and profit.
+Find the three highest-selling and most profitable products.
+Divide the profit by the sales to create a new column named "Profit Margin".
+Save the updated dataframe as "updated_sales_data.csv".
+Data Set
+
+sales_data-2.csv
+
+Sample Input:
+
+RegionProductSalesProfit
+
+East	A	100	20
+East	B	200	40
+East	C	150	30
+West	A	50	10
+West	B	250	50
+West	C	100	20
+North	A	300	60
+North	B	100	20
+North	C	150	30
+South	A	200	40
+South	B	150	30
+South	C	50	10
+
+
+
+
+import pandas as pd
+
+
+#1.Read the CSV file
+sales_data = pd.read_csv('sales_data.csv')
+
+
+#2.Print the first 5 rows
+print(sales_data.head())
+
+#3.Calculate the sales and profit by region
+sales_by_region = sales_data.groupby('Region').agg({'Sales': 'sum', 'Profit': 'sum'})
+print(sales_by_region)
+
+# 4.Find the three highest-selling and most profitable products
+top_products_by_sales = sales_data.sort_values(by='Sales', ascending=False).head(3)
+print(top_products_by_sales)
+
+top_products_by_profit = sales_data.sort_values(by='Profit', ascending=False).head(3)
+print(top_products_by_profit)
+
+#5.Calculate the profit margin and add it as a new column
+
+sales_data['Profit Margin'] = sales_data['Profit'] / sales_data['Sales']
+
+#6.Save the updated dataframe as a new CSV file
+
+
+sales_data.to_csv('updated_sales_data.csv', index=False)
